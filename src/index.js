@@ -16,17 +16,15 @@ const refs = {
 refs.input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(e) {
+  resetMarkup();
   if (!e.target.value.trim()) {
-    resetMarkup();
     return;
   }
   fetchCountries(e.target.value.trim())
     .then(data => {
-      resetMarkup();
       renderMarkup(data);
     })
     .catch(error => {
-      resetMarkup();
       Notify.failure('Oops, there is no country with that name');
     });
 }
